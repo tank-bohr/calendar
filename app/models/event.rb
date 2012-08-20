@@ -1,28 +1,40 @@
 class Event < ActiveRecord::Base
   attr_accessible :description, :time
 
-  has_many :years
-  has_many :months
-  has_many :month_days
-  has_many :week_days
+  [:years, :months, :month_days, :week_days].each do |assoc|
+    has_many assoc
+    define_method("the_#{assoc.to_s}") do
+        self.send(assoc).map{|item| item.value}
+    end
+  end
 
   def belongs_to_date? date
-    if !years.empty? && years.detect{|y| y.year == date.year}.nil?
+    unless years.empty? || the_years.include?(date.year)
         return false
     end
 
-    if !months.empty? && months.detect{|m| m.month == date.month}.nil?
+    unless months.empty? || the_months.include?(date.month)
         return false
     end
 
-    if !month_days.empty? && month_days.detect{|md| md.day == date.day}.nil?
+    unless month_days.empty? || the_month_days.include?(date.day)
         return false
     end
 
-    if !week_days.empty? && week_days.detect{|wd| wd.day == date.wday}.nil?
+    unless week_days.empty? || the_week_days.include?(date.wday)
         return false
     end
 
     true
+  end
+
+
+  def add_weekly str
+  end
+
+  def add_monthly str
+    days = str.split /\s*\,\s*/
+    self.month_days = days.map{|d| MonthDay.new :day => d}
+    self.save
   end
 end
