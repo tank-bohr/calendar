@@ -6,6 +6,7 @@ class CreateYears < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :years, :event_id, :unique => true
+    add_index :years, :event_id
+    add_index :years, [:event_id, :year], :unique => true
   end
 end

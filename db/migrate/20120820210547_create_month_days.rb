@@ -6,6 +6,7 @@ class CreateMonthDays < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :month_days, :event_id, :unique => true
+    add_index :month_days, :event_id
+    add_index :month_days, [:event_id, :day], :unique => true
   end
 end

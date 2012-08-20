@@ -27,7 +27,8 @@ ActiveRecord::Schema.define(:version => 20120820210547) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "month_days", ["event_id"], :name => "index_month_days_on_event_id", :unique => true
+  add_index "month_days", ["event_id", "day"], :name => "index_month_days_on_event_id_and_day", :unique => true
+  add_index "month_days", ["event_id"], :name => "index_month_days_on_event_id"
 
   create_table "months", :force => true do |t|
     t.integer  "event_id"
@@ -36,7 +37,8 @@ ActiveRecord::Schema.define(:version => 20120820210547) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "months", ["event_id"], :name => "index_months_on_event_id", :unique => true
+  add_index "months", ["event_id", "month"], :name => "index_months_on_event_id_and_month", :unique => true
+  add_index "months", ["event_id"], :name => "index_months_on_event_id"
 
   create_table "week_days", :force => true do |t|
     t.integer  "event_id"
@@ -45,7 +47,8 @@ ActiveRecord::Schema.define(:version => 20120820210547) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "week_days", ["event_id"], :name => "index_week_days_on_event_id", :unique => true
+  add_index "week_days", ["event_id", "day"], :name => "index_week_days_on_event_id_and_day", :unique => true
+  add_index "week_days", ["event_id"], :name => "index_week_days_on_event_id"
 
   create_table "years", :force => true do |t|
     t.integer  "event_id"
@@ -54,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20120820210547) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "years", ["event_id"], :name => "index_years_on_event_id", :unique => true
+  add_index "years", ["event_id", "year"], :name => "index_years_on_event_id_and_year", :unique => true
+  add_index "years", ["event_id"], :name => "index_years_on_event_id"
 
 end
