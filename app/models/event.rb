@@ -9,11 +9,11 @@ class Event < ActiveRecord::Base
   end
 
   def belongs_to_date? date
-    unless years.empty? || the_years.include?(date.year)
+    unless years.empty?      || the_years.include?(date.year)
         return false
     end
 
-    unless months.empty? || the_months.include?(date.month)
+    unless months.empty?     || the_months.include?(date.month)
         return false
     end
 
@@ -21,7 +21,7 @@ class Event < ActiveRecord::Base
         return false
     end
 
-    unless week_days.empty? || the_week_days.include?(date.wday)
+    unless week_days.empty?  || the_week_days.include?(date.wday)
         return false
     end
 
