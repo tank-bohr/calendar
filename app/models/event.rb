@@ -8,6 +8,20 @@ class Event < ActiveRecord::Base
     end
   end
 
+  PeriodMap = {once: 1, weekly: 2, monthly: 3}
+
+  def period
+    original_value = super()
+    PeriodMap.invert[original_value]
+  end
+
+  def period= val
+    value_to_set = PeriodMap[val]
+    super(value_to_set)
+  end
+
+
+
   def belongs_to_date? date
     unless years.empty?      || the_years.include?(date.year)
       return false
