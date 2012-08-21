@@ -43,7 +43,9 @@ class Event < ActiveRecord::Base
   end
 
   def to_s
-    "#{time.strftime('%l:%M %P')} -- #{description}"
+    time_string = ''
+    time_string = time.strftime('%l:%M %P') unless time.nil?
+    "#{time_string} -- #{description}"
   end
 
 
