@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  attr_accessible :description, :time
+  attr_accessible :description, :time, :period, :period_value
 
   [:years, :months, :month_days, :week_days].each do |assoc|
     has_many assoc
@@ -18,6 +18,13 @@ class Event < ActiveRecord::Base
   def period= val
     value_to_set = PeriodMap[val]
     super(value_to_set)
+  end
+
+  def apply_period
+    method = "add_#{period.to_s}".to_sym
+    if @event.respond_to? method
+      @event.send(method, period_value)
+    end
   end
 
 
@@ -42,10 +49,13 @@ class Event < ActiveRecord::Base
     true
   end
 
+
+  def timef
+    time.nil? ? '' : time.strftime('%l:%M %P')
+  end
+
   def to_s
-    time_string = ''
-    time_string = time.strftime('%l:%M %P') unless time.nil?
-    "#{time_string} -- #{description}"
+    "#{timef} -- #{description}"
   end
 
 

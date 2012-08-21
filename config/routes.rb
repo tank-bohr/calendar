@@ -1,10 +1,8 @@
 Calendar::Application.routes.draw do
   get "welcome/index"
 
-  get "event/new"
-  post "event/create"
-
-
+  resources :events
+  
   match 'calendar/day/:day/:month(/:year)' => 'calendar#by_day'
   match 'calendar/week/:week(/:year)'      => 'calendar#by_week'
   match 'calendar/month/:month(/:year)'    => 'calendar#by_month'

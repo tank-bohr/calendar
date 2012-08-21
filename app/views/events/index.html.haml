@@ -1,0 +1,14 @@
+%table
+  %thead
+    %tr
+      %th Время
+      %th Событие
+      %th
+      %th
+  %tbody
+    - @events.each do |e|
+      %tr
+        %td= e.timef
+        %td= e.description
+        %td= link_to 'Редактировать', edit_event_path(e)
+        %td= link_to 'Удалить', e, :method => :delete

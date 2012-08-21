@@ -1,0 +1,20 @@
+/ blah-blah
+= form_for @event do |f|
+  .field
+    = f.label 'Время'
+    = f.time_select :time
+    %br
+  .field
+    = f.label 'Описание'
+    = f.text_field :description
+    %br
+  .field
+    = f.label 'Период'
+    = f.select :period, [:once, :weekly, :monthly]
+    %br
+  .field
+    = f.label 'Повторять'
+    = f.text_field :period_value
+    %br
+  .action
+    = f.submit 'Сохранить' 

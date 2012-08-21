@@ -2,8 +2,7 @@
   today = Date.today();
 %h1 Календарь
 %ul
-  %li
-    %a{:href => '/event/new'} Добавить событие
+  %li= link_to 'Добавить событие', new_event_path
   %li
     %a{:href => "/calendar/day/#{today.day}/#{today.month}/#{today.year}"} По дням
   %li
