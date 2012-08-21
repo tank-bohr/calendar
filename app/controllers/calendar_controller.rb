@@ -7,5 +7,9 @@ class CalendarController < ApplicationController
   end
 
   def by_month
+    year = params[:year] || Date.today.year
+    month = params[:month]
+    @year, @month = year.to_i, month.to_i
+    @list = Event.by_month(@year, @month)
   end
 end

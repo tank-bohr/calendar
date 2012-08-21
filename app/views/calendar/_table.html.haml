@@ -1,0 +1,7 @@
+%table
+  - @list.each do |day|
+    %tr
+      %td= day[:date].strftime '%e %b %Y, %a'
+      %td
+        - day[:events].each do |e|
+          %p= e.to_s
