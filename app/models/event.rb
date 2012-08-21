@@ -49,9 +49,36 @@ class Event < ActiveRecord::Base
     self.save
   end
 
+
   def add_monthly str
     days = str.split /\s*\,\s*/
     self.month_days = days.compact.uniq.map{|d| MonthDay.new :day => d.to_i}
     self.save
+  end
+  
+  
+  class << self
+
+    def all_events
+      self.includes :years, :months, :month_days, :week_days
+    end
+
+    def by_month year, month
+      from = Date.new year, month, 1
+      to = from.next_month - 1
+      retval = []
+      events = all_events
+      (from..to).each do |date|
+        retval.push({
+                  :date => date,
+                  :events => events.select{ |ev| ev.belongs_to_date? date }
+                })
+      end
+
+      return retval
+    end
+    
+    def by_week year, week
+    end
   end
 end
