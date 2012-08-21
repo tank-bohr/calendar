@@ -28,6 +28,9 @@ class Event < ActiveRecord::Base
     true
   end
 
+  def to_s
+    "#{time.strftime('%l:%M %P')} -- #{description}"
+  end
 
 
   def add_once str

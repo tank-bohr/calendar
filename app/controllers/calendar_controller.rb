@@ -1,0 +1,11 @@
+class CalendarController < ApplicationController
+  def by_week
+    year = params[:year] || Date.today.year
+    week = params[:week_number]
+    @year, @week = year.to_i, week.to_i
+    @list = Event.by_week(@year, @week)
+  end
+
+  def by_month
+  end
+end

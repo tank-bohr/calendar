@@ -1,0 +1,12 @@
+.arrows
+  %a{:href => prev_week_url} &larr;
+  %a{:href => next_week_url} &rarr;
+
+%table
+  - @list.each do |day|
+    %tr
+      %td= day[:date]
+      %td
+        - day[:events].each do |e|
+          %p= e.to_s
+  
