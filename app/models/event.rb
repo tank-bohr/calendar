@@ -32,7 +32,6 @@ class Event < ActiveRecord::Base
   def add_weekly str
     days = str.split /\s*\,\s*/
     week_days_numbers = {mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6, sun: 7}
-    p week_days_numbers
 
     processed = days.map do |d|
         digit = nil
@@ -52,7 +51,7 @@ class Event < ActiveRecord::Base
 
   def add_monthly str
     days = str.split /\s*\,\s*/
-    self.month_days = days.map{|d| MonthDay.new :day => d}.uniq
+    self.month_days = days.compact.uniq.map{|d| MonthDay.new :day => d.to_i}
     self.save
   end
 end
