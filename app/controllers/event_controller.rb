@@ -5,12 +5,9 @@ class EventController < ApplicationController
     time = extract_time()
     @event = Event.create(:description => params[:description], :time => time)
 
-    if 'once' == params[:period]
-       @event.add_once params[:period_values]
-    elsif 'weekly' == params[:period]
-      @event.add_weekly params[:period_values]
-    elsif 'monthly' == params[:period]
-      @event.add_montly params[:period_values]
+    method = "add_#{params[:period]}".to_sym
+    if @event.respond_to? method
+      @event.send(method, params[:period_values])
     end
   end
 end
