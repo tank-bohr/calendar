@@ -63,9 +63,7 @@ class Event < ActiveRecord::Base
       self.includes :years, :months, :month_days, :week_days
     end
 
-    def by_month year, month
-      from = Date.new year, month, 1
-      to = from.next_month - 1
+    def events_of_range from, to
       retval = []
       events = all_events
       (from..to).each do |date|
@@ -77,8 +75,18 @@ class Event < ActiveRecord::Base
 
       return retval
     end
+
+
+    def by_month year, month
+      from = Date.new(year, month, 1)
+      to = from.next_month - 1
+      events_of_range from, to
+    end
     
     def by_week year, week
+      from = Date.commercial(year, week, 1)
+      to = Date.commercial(year, week, 7)
+      events_of_range(from, to)
     end
   end
 end
