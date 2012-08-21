@@ -1,4 +1,7 @@
 Calendar::Application.routes.draw do
+  get "event/new"
+  post "event/create"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

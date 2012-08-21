@@ -1,0 +1,5 @@
+- if @event.errors.empty?
+  %p Сохранение прошло успешно
+- else
+  -  @event.errors.each do |error|
+    %p= error

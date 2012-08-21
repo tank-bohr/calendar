@@ -29,6 +29,15 @@ class Event < ActiveRecord::Base
   end
 
 
+
+  def add_once str
+    date = Date.parse(str)
+    self.month_days = [ MonthDay.new(:day => date.day) ]
+    self.months = [ Month.new(:month => date.month) ]
+    self.years = [ Year.new(:year => date.year) ]
+  end
+
+
   def add_weekly str
     days = str.split /\s*\,\s*/
     week_days_numbers = {mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6, sun: 7}
@@ -45,15 +54,12 @@ class Event < ActiveRecord::Base
     end.compact.uniq
 
     self.week_days = processed.map{|day| WeekDay.new :day => day}
-
-    self.save
   end
 
 
   def add_monthly str
     days = str.split /\s*\,\s*/
     self.month_days = days.compact.uniq.map{|d| MonthDay.new :day => d.to_i}
-    self.save
   end
   
   
