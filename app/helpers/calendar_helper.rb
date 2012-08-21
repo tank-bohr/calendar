@@ -26,4 +26,20 @@ module CalendarHelper
     prev_month_year = date.year
     "/calendar/month/#{prev_month}/#{prev_month_year}"
   end
+
+  def next_day_url
+    date = Date.new(@year, @month, @day).next_day
+    next_day = date.day
+    next_day_month = date.month
+    next_day_year = date.year
+    "/calendar/day/#{next_day}/#{next_day_month}/#{next_day_year}"
+  end
+
+  def prev_day_url
+    date = Date.new(@year, @month, @day).prev_day
+    prev_day = date.day
+    prev_day_month = date.month
+    prev_day_year = date.year
+    "/calendar/day/#{prev_day}/#{prev_day_month}/#{prev_day_year}"
+  end
 end

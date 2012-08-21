@@ -1,0 +1,11 @@
+.arrows
+  %a{:href => prev_day_url} &larr;
+  %a{:href => next_day_url} &rarr;
+
+%h1= @item[:date].strftime '%e %b %Y, %a'
+- if @item[:events].empty?
+  %h3 В этот день нет событий
+-else
+  %ul
+    - @item[:events].each do |event|
+      %li= event.to_s

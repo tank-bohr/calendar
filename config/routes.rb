@@ -5,8 +5,9 @@ Calendar::Application.routes.draw do
   post "event/create"
 
 
-  match 'calendar/week/:week_number(/:year)'  => 'calendar#by_week'
-  match 'calendar/month/:month(/:year)'       => 'calendar#by_month'
+  match 'calendar/day/:day/:month(/:year)' => 'calendar#by_day'
+  match 'calendar/week/:week(/:year)'      => 'calendar#by_week'
+  match 'calendar/month/:month(/:year)'    => 'calendar#by_month'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
