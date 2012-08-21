@@ -3,6 +3,6 @@ class Year < ActiveRecord::Base
   attr_accessible :year
 
   def value
-  	year
+    year
   end
 end

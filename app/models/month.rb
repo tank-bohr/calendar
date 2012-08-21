@@ -3,6 +3,6 @@ class Month < ActiveRecord::Base
   attr_accessible :month
 
   def value
-  	month
+    month
   end
 end

@@ -3,6 +3,6 @@ class MonthDay < ActiveRecord::Base
   attr_accessible :day
 
   def value
-  	day
+    day
   end
 end
