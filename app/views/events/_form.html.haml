@@ -9,7 +9,7 @@
     %br
   .field
     = f.label 'Период'
-    = f.select :period, [:once, :weekly, :monthly]
+    = f.select :period, {'Один раз' => 1, 'Еженедельно' => 2, 'Ежемесячно' => 3}
     %br
   .field
     = f.label 'Повторять'

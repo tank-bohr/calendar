@@ -8,27 +8,6 @@ class Event < ActiveRecord::Base
     end
   end
 
-  PeriodMap = {once: 1, weekly: 2, monthly: 3}
-
-  def period
-    original_value = super()
-    PeriodMap.invert[original_value]
-  end
-
-  def period= val
-    value_to_set = PeriodMap[val]
-    super(value_to_set)
-  end
-
-  def apply_period
-    method = "add_#{period.to_s}".to_sym
-    if @event.respond_to? method
-      @event.send(method, period_value)
-    end
-  end
-
-
-
   def belongs_to_date? date
     unless years.empty?      || the_years.include?(date.year)
       return false
@@ -91,6 +70,20 @@ class Event < ActiveRecord::Base
     self.month_days = days.compact.uniq.map{|d| MonthDay.new :day => d.to_i}
   end
   
+
+  PeriodMap = {once: 1, weekly: 2, monthly: 3}
+  def apply_period
+    period_name = PeriodMap.invert[period]
+
+    method = "add_#{period_name.to_s}".to_sym
+    Rails.logger.debug("#{method} -- #{period_value}")
+    if self.respond_to? method
+      self.send(method, period_value)
+    else
+      Rails.logger.error("Doesn't respond to [#{method}]")
+    end
+  end
+
   
   class << self
 
