@@ -3,9 +3,5 @@
 %h1 Календарь
 %ul
   %li= link_to 'Добавить событие', new_event_path
-  %li
-    %a{:href => "/calendar/day/#{today.day}/#{today.month}/#{today.year}"} По дням
-  %li
-    %a{:href => "/calendar/week/#{today.cweek}/#{today.year}"} По неделям
-  %li
-    %a{:href => "/calendar/week/#{today.month}/#{today.year}"} По месяцам
+  %li= link_to 'По дням', "/calendar/day/#{today.day}/#{today.month}/#{today.year}"
+  %li= link_to 'По месяцам', "/calendar/month/#{today.month}/#{today.year}"
