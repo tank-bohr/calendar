@@ -4,4 +4,5 @@
 %ul
   %li= link_to 'Добавить событие', new_event_path
   %li= link_to 'По дням', "/calendar/day/#{today.day}/#{today.month}/#{today.year}"
+  %li= link_to 'По неделям', "/calendar/week/#{today.cweek}/#{today.year}"
   %li= link_to 'По месяцам', "/calendar/month/#{today.month}/#{today.year}"
