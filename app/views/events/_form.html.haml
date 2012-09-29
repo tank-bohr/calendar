@@ -1,4 +1,3 @@
-/ blah-blah
 = form_for @event do |f|
   .field
     = f.label 'Время'
@@ -10,11 +9,34 @@
     %br
   .field
     = f.label 'Период'
-    = f.select :period, [:once, :weekly, :monthly]
+    = f.select :period, {'Один раз' => 1, 'Еженедельно' => 2, 'Ежемесячно' => 3}
     %br
   .field
     = f.label 'Повторять'
     = f.text_field :period_value
     %br
   .action
-    = f.submit 'Сохранить' 
+    = f.submit 'Сохранить'
+
+%hr
+
+%h3 Формат
+%table
+  %thead
+    %tr
+      %th Период
+      %th Повторять
+      %th
+  %tdata
+    %tr
+      %td once
+      %td 22.08.2012
+      %td Событие добавляется для одного конкретного дня
+    %tr
+      %td weekly
+      %td wed, fri
+      %td Каждую среду и пятницу
+    %tr
+      %td montly
+      %td 1, 5, 20
+      %td Первое, пятое и двадцатое число каждого месяца
